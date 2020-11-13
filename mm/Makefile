@@ -1,5 +1,7 @@
 CC	=gcc
-CFLAGS	=-O -Wall -fstrength-reduce -fcombine-regs -fomit-frame-pointer \
+# gcc: error: unrecognized command line option ‘-fcombine-regs’; did you mean ‘-Wcompare-reals’?
+# CFLAGS	=-O -Wall -fstrength-reduce -fcombine-regs -fomit-frame-pointer
+CFLAGS	=-O -Wall -fstrength-reduce -Wcompare-reals -fomit-frame-pointer \
 	-finline-functions -nostdinc -I../include
 AS	=gas
 AR	=gar

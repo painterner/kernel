@@ -7,19 +7,26 @@
 #
 
 AR	=gar
-AS	=gas
+# AS	=gas
+AS	=as
+ASFLAGS =--32
 LD	=gld
 LDFLAGS	=-s -x
 CC	=gcc
-CFLAGS	=-Wall -O -fstrength-reduce -fomit-frame-pointer -fcombine-regs \
-	-finline-functions -mstring-insns -nostdinc -I../include
+# gcc: error: unrecognized command line option ‘-fcombine-regs’; did you mean ‘-Wcompare-reals’?
+# pterror: gcc: error: unrecognized command line option ‘-mstring-insns’; did you mean ‘-fstrict-enums’?
+# CFLAGS	=-Wall -O -fstrength-reduce -fomit-frame-pointer -fcombine-regs
+	# -finline-functions -mstring-insns -nostdinc -I../include
+
+CFLAGS	=-Wall -O -fstrength-reduce -fomit-frame-pointer -Wcompare-reals \
+	-finline-functions -nostdinc -m32 -I../include
 CPP	=gcc -E -nostdinc -I../include
 
 .c.s:
 	$(CC) $(CFLAGS) \
 	-S -o $*.s $<
 .s.o:
-	$(AS) -c -o $*.o $<
+	$(AS) $(ASFLAGS) -c -o $*.o $<
 .c.o:
 	$(CC) $(CFLAGS) \
 	-c -o $*.o $<
